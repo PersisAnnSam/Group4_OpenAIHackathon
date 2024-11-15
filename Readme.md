@@ -9,5 +9,14 @@ Automated ML
   Completed Successfully
   ![image](https://github.com/user-attachments/assets/8927a2ab-b920-46b9-b9ec-a326b54a6689)
 
+  Model Summary
+  ![image](https://github.com/user-attachments/assets/69ac8c11-4066-4cf9-a4bc-b3d4f42c2454)
+
+  Test results
+  ![image](https://github.com/user-attachments/assets/cbf3eee2-832e-4c8c-b7da-7b754398d616)
+
+
+Azure Machine Learning Designer
+
 
 
