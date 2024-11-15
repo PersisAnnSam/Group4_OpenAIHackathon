@@ -1,0 +1,108 @@
+```python
+import pandas as pd
+
+# Read the loan data from a CSV file
+df = pd.read_csv(r'/content/loan_data.csv')
+
+# Display the first few rows of the dataframe
+df.head()
+
+# Display summary statistics of the dataframe
+df.describe()
+
+# Display information about the dataframe, including column names and data types
+df.info()
+
+# Encode categorical variables using one-hot encoding and drop the first category
+df_enc = pd.get_dummies(df, columns=['person_education', 'loan_intent', 'person_home_ownership', 'person_gender'], drop_first=True)
+
+# Convert the 'previous_loan_defaults_on_file' column from "Yes" and "No" to 1 and 0
+df_enc['previous_loan_defaults_on_file'] = df_enc['previous_loan_defaults_on_file'].map({'Yes': 1, 'No': 0})
+
+# Display the first few rows of the encoded dataframe
+df_enc.head()
+
+# Display summary statistics of the encoded dataframe
+df_enc.describe()
+
+import seaborn as sns
+
+# Create a heatmap of the correlation matrix of the encoded dataframe
+sns.heatmap(df_enc.corr(), cmap='coolwarm')
+
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+# Define a list of continuous columns
+continuous_columns = [
+    'person_age',
+    'person_income',
+    'loan_amnt',
+    'loan_int_rate',
+    'loan_percent_income',
+    'cb_person_cred_hist_length',
+    'credit_score'
+]
+
+# Initialize a StandardScaler object
+scaler = StandardScaler()
+
+# Standardize the values of the continuous columns in the encoded dataframe
+df_enc[continuous_columns] = scaler.fit_transform(df_enc[continuous_columns])
+
+# Display the first few rows of the standardized dataframe
+df_enc.head()
+
+# Separate the features (X) and the target variable (y)
+X = df_enc.drop(columns=['loan_status'])
+y = df_enc['loan_status']
+
+from sklearn.model_selection import train_test_split
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define a dictionary of models to be tested
+models = {
+    'naive_bayes': GaussianNB(),
+    'knn': KNeighborsClassifier(),
+    'svc': SVC(),
+    'linear_svc': LinearSVC(),
+    'decision_tree': DecisionTreeClassifier(),
+    'decision_tree100': DecisionTreeClassifier(max_depth=100),
+    'decision_tree200': DecisionTreeClassifier(max_depth=200),
+    'decision_tree300': DecisionTreeClassifier(max_depth=300),
+    'random_forest': RandomForestClassifier(),
+    'random_forest200': RandomForestClassifier(n_estimators=200),
+    'random_forest400': RandomForestClassifier(n_estimators=400),
+    'random_forest500': RandomForestClassifier(n_estimators=500),
+    'logistic_regression': LogisticRegression()
+}
+
+# Initialize variables to keep track of the best model
+max_accuracy = 0
+best_model_name = None
+best_model = None
+
+# Iterate over each model in the dictionary and evaluate its performance
+for model_name, model in models.items():
+    # Fit the model on the training data
+    model.fit(X_train, y_train)
+  
+    # Make predictions on the test data
+    p = model.predict(X_test)
+  
+    # Calculate and print the accuracy of the model
+    print(model_name, accuracy_score(y_test, p))
+    print('****')
+  
+    # Update the best model if the current model has higher accuracy
+    if accuracy_score(y_test, p) > max_accuracy:
+        max_accuracy = accuracy_score(y_test, p)
+        best_model_name = model_name
+        best_model = model
+
+# Print the best model name, model object, and maximum accuracy achieved
+print('Best Model Name -', best_model_name)
+print('Best Model -', best_model)
+print('Max Accuracy -', max_accuracy)
+```
