@@ -1,0 +1,4 @@
+Unit Test 1: Test if the function reads the CSV file correctly and returns a non-empty dataframe.
+Unit Test 2: Test if the function encodes categorical variables correctly using one-hot encoding.
+Unit Test 3: Test if the function scales the continuous variables correctly using StandardScaler.
+Unit Test 4: Test if the function selects the best model with the highest accuracy score.
