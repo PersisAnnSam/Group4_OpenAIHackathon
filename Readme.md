@@ -20,5 +20,21 @@ Automated ML
 
 Azure Machine Learning Designer
 
+  Inference pipeline to predict status of loan applications
+  ![image](https://github.com/user-attachments/assets/5ed2bef7-6ba4-4117-8a89-97db00159a8b)
+  ![image](https://github.com/user-attachments/assets/ecfd0854-b1bd-4497-8c72-e76930d1791f)
+
+
+Notebooks - Loan_Approval_dataset.ipynb
+Use Generative AI to generate test cases and comments for your notebook
+  Code:
+  g4_genai_to_addcommentandtestcases.ipynb
+  
+  Output:
+  Notebook with comments.txt
+  output-TestCases.txt
+
+
+
 
 
