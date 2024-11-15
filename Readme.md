@@ -1,3 +1,5 @@
+                              Group 4
+                              Binu Francis, Jagadeesh R, Uday B Prajapati, Persis Ann Sam
 Problem Statement:
 Develop a machine learning model to predict whether a loan application will be approved or rejected based on applicant information such as credit score, income, loan amount, employment status, and other relevant features. The goal is to assist the loan approval process by accurately classifying loan applications into approved or rejected categories.
 
